@@ -12,7 +12,8 @@ describe Notifier do
     it "should send an email" do
       Notifier.send_forgot_password_notification(
         "someone@somewhere.com",
-        "some_made_up_token"
+        "some_made_up_token",
+        "test.rstat.us"
       )
       assert_equal 1, Pony.deliveries.count
     end
@@ -22,7 +23,8 @@ describe Notifier do
     it "should send an email" do
       Notifier.send_confirm_email_notification(
         "someone_else@somewhere_else.com",
-        "some_other_made_up_token"
+        "some_other_made_up_token",
+        "test.rstat.us"
       )
       assert_equal 1, Pony.deliveries.count
     end

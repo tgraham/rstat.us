@@ -130,7 +130,11 @@ describe "profile" do
         assert has_content? @u.author.name
       end
 
-      assert_equal 1, Pony.deliveries.size
+      if ENV["CONFIRMATION_DISABLED"]
+        assert_equal 0, Pony.deliveries.size
+      else
+        assert_equal 1, Pony.deliveries.size
+      end
     end
 
     it "does not verify your email if you havent specified one" do

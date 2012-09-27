@@ -16,3 +16,6 @@ unless Rails.env.production?
     end
   end
 end
+
+# Set to 'true' to turn off email confirmation for self-hosted nodes
+ENV["CONFIRMATION_DISABLED"] = 'false'

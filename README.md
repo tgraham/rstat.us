@@ -217,3 +217,6 @@ Running your own node
 We're working on making this super easy, but right now, we're not quite there.
 
 If you do run your own node, please keep current with upstream.
+
+- You can disable sending confirmation emails when a user adds/updates their email address by 
+  setting ENV["CONFIRMATION_DISABLED"] to 'true' in config/initializers/config.rb

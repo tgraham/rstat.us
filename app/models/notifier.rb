@@ -4,7 +4,8 @@
 
 class Notifier
 
-  def self.send_forgot_password_notification(recipient, token)
+  def self.send_forgot_password_notification(recipient, token, url)
+    @url = url
     Pony.mail(:to => recipient,
               :subject => "Reset your rstat.us password",
               :from => "rstatus@rstat.us",
@@ -12,7 +13,8 @@ class Notifier
               :via => :smtp)
   end
 
-  def self.send_confirm_email_notification(recipient, token)
+  def self.send_confirm_email_notification(recipient, token, url)
+    @url = url
     Pony.mail(:to => recipient,
               :subject => "Confirm your rstat.us email",
               :from => "rstatus@rstat.us",

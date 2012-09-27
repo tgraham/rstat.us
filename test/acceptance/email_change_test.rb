@@ -7,8 +7,10 @@ describe "email change" do
   describe "edit profile" do
     it "updates the email address" do
 
-      Notifier.expects(:send_confirm_email_notification)
-
+      unless ENV["CONFIRMATION_DISABLED"]
+        Notifier.expects(:send_confirm_email_notification)
+      end
+      
       # Log in to system
       u = Fabricate(:user, :email => "some@email.com")
       u.password = "password"
@@ -25,7 +27,11 @@ describe "email change" do
       # Need to figure out the best way to do this, expects is swallowing up token generation...
       # refute u.perishable_token.nil?
       within 'div.flash' do
-        assert has_content? "A link to confirm your updated email address has been sent to team@jackhq.com"
+        if ENV["CONFIRMATION_DISABLED"]
+          assert has_content? "Profile saved!"
+        else
+          assert has_content? "A link to confirm your updated email address has been sent to team@jackhq.com"
+        end
       end
     end
 

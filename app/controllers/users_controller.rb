@@ -64,8 +64,8 @@ class UsersController < ApplicationController
       response = @user.edit_user_profile(params)
       if response == true
 
-        unless @user.email.blank? || @user.email_confirmed
-          Notifier.send_confirm_email_notification(@user.email, @user.create_token)
+        unless @user.email.blank? || @user.email_confirmed || ENV["CONFIRMATION_DISABLED"]
+          Notifier.send_confirm_email_notification(@user.email, @user.create_token, root_url)
           flash[:notice] = "A link to confirm your updated email address has been sent to #{@user.email}."
         else
           flash[:notice] = "Profile saved!"
@@ -233,7 +233,7 @@ class UsersController < ApplicationController
       flash[:error] = "Your account could not be found, please check your email and try again."
       render "login/forgot_password"
     else
-      Notifier.send_forgot_password_notification(user.email, user.create_token)
+      Notifier.send_forgot_password_notification(user.email, user.create_token, root_url)
       # Redirect to try to avoid repost issues
       session[:fp_email] = user.email
       redirect_to forgot_password_confirm_path
