@@ -19,7 +19,6 @@ gem 'jquery-rails', "~> 1.0.12"
 
 gem 'airbrake', "~> 3.0.9"
 gem 'bcrypt-ruby', "~> 3.0.0"
-gem 'unicorn', "~> 4.0.1"
 
 gem 'omniauth', "~> 1.1.0"
 gem "omniauth-twitter", "~> 0.0.12"
@@ -67,4 +66,10 @@ end
 group :test do
   gem "webmock", "~> 1.6.4"
   gem "therubyracer", "~> 0.9.9"
+end
+
+group :production do
+  # Strongly recommended for production use
+  # uncomment to use unicorn
+  # gem 'unicorn', "~> 4.0.1"
 end
