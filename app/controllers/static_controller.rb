@@ -10,6 +10,10 @@ class StaticController < ApplicationController
 
   def about
     @title = "about us"
+    
+    github = Github.new
+    results = github.repos.contributors 'hotsh', 'rstat.us'
+    @contributors = results.sort {|x,y| (x.login.downcase <=> y.login.downcase)}
   end
 
   def contact
